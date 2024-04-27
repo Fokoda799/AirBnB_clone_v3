@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Contains the class DBStorage
+contains the class DBStorage
 """
-
 import models
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
@@ -76,18 +75,21 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """test_get_count.py"""
+        """Returns the object based on the class and its ID,
+        or None if not found"""
         if cls not in classes.values():
             return None
-        objs = models.storage.all(cls)
-        for obj in objs.values():
-            if obj.id == id:
-                return obj
+
+        all_class = models.storage.all(cls)
+        for value in all_class.values():
+            if (value.id == id):
+                return value
 
     def count(self, cls=None):
-        """count number of obj"""
+        """Returns the number of objects in storage matching the given class.
+        If no class is passed, returns the count of all objects in storage"""
         if cls is not None and cls not in classes.values():
             return 0
-        obj = self.all(cls) if cls else\
+        query = self.all(cls) if cls else\
             self.all().values()
-        return len(obj)
+        return len(query)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestDBStorageDocs and TestDBStorage classes
+contains the TestDBStorageDocs and TestDBStorage classes
 """
 
 from datetime import datetime
@@ -18,6 +18,7 @@ import json
 import os
 import pep8
 import unittest
+from models import storage
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -87,26 +88,23 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test that save properly saves objects to file.json"""
 
-    @unittest.skipIf(models.storage_t) != 'db', "not testing db storage")
     def test_get(self):
-        """Test that retrieve one object"""
-        test_dic = {"name": "morocco"}
-        test_state = State(**test_dic)
-        storage.new(test_state)
+        """ Tests method for obtaining an instance db storage"""
+        dic = {"name": "blah"}
+        instance = State(**dic)
+        storage.new(instance)
         storage.save()
-        get_obj = storage.get(State, test_satet.id)
-        self.assertEqual(get_obj, test_state)
+        get_instance = storage.get(State, instance.id)
+        self.assertEqual(get_instance, instance)
 
-    @unittest.skipIf(models.storage_t) != 'db', "not testing db storage")
     def test_count(self):
-        """Test that count the number of objects in storage"""
-        test_dic = {"name": "morocco"}
-        test_state = State(**test_dic)
-        storage.new(test_state)
-        test_dic = {"name": "casa", "state_id" = test_state.id}
-        test_city = City(**test_dic)
-        storage.new(test_city)
+        """ Tests count method db storage """
+        dic = {"name": "Bleh"}
+        state = State(**dic)
+        storage.new(state)
+        dic = {"name": "Mexico", "state_id": state.id}
+        city = City(**dic)
+        storage.new(city)
         storage.save()
-        n = storage.count()
-        self.assertEqual(len(storage.all()), n)
-
+        c = storage.count()
+        self.assertEqual(len(storage.all()), c)
