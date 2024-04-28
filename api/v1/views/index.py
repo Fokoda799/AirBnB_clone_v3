@@ -14,7 +14,7 @@ def status():
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
     """ Shows number of ech class"""
-    amenities = storage.count('Amenitie')
+    amenities = storage.count('Amenity')
     cities = storage.count('City')
     places = storage.count('Place')
     reviews = storage.count('Review')
