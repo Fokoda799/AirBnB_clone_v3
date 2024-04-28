@@ -118,11 +118,10 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """Test that the get method properly retrievs objects"""
         storage = FileStorage()
-        dic = {"name": "Good"}
+        dic = {"name": "Morocco"}
         instance = State(**dic)
         storage.new(instance)
         storage.save()
-        storage = FileStorage()
         get_instance = storage.get(State, instance.id)
         self.assertEqual(get_instance, instance)
 
