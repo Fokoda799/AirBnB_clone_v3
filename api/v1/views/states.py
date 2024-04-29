@@ -1,54 +1,60 @@
 #!/usr/bin/python3
-"""States view"""
+""" The api.v1.views.states module """
 from api.v1.views import app_views
-from flask import jsonify, abort, request, make_response
-from models.state import State
+from flask import jsonify, abort, make_response, request
 from models import storage
+from models.state import State
 
 
-@app_views.route('/states/', strict_slashes=False)
-def states():
-    """ Get all of states"""
-    states = storage.all(State)
-    states_list = []
-    for state in states.values():
-        states_list.append(state.to_dict())
-    return jsonify(states_list)
+@app_views.route('/states', strict_slashes=False)
+def all_state():
+    """ A function that lists all state objects """
+    all_states = storage.all(State)
+
+    return jsonify([obj.to_dict() for obj in all_states.values()])
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False)
-def state(state_id):
-    """ Get one state """
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+def retrieve_state(state_id):
+    """ A function that retrieves a state object """
     state = storage.get(State, state_id)
+
     if not state:
         abort(404)
+
     return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'],
-                 strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
-    """ Delete one state """
+    """ A function that deletes a state object """
     state = storage.get(State, state_id)
+
     if not state:
         abort(404)
+
     state.delete()
     storage.save()
-    return {}
+
+    return make_response(jsonify({}), 200)
 
 
-@app_views.route('/states/', methods=['POST'], strict_slashes=False)
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
-    """ Create one state """
-    state = request.get_json()
-    if not state:
+    """ A function that creates a state object """
+    new_state = request.get_json()
+    if not new_state:
         abort(400, "Not a JSON")
-    if 'name' not in state:
+
+    if "name" not in new_state:
         abort(400, "Missing name")
-    new_state = State(**state)
-    storage.new(new_state)
+
+    state = State(**new_state)
+
+    storage.new(state)
     storage.save()
-    return make_response(jsonify(new_state.to_dict()), 201)
+    return make_response(jsonify(state.to_dict()), 201)
 
 
 @app_views.route('/states/<state_id>',
