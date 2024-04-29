@@ -1,1 +1,49 @@
-{"User.7deb4981-0cb3-4aff-be76-39ebe108f66f": {"id": "7deb4981-0cb3-4aff-be76-39ebe108f66f", "created_at": "2024-04-28T19:25:42.517921", "updated_at": "2024-04-28T19:25:42.518359", "__class__": "User"}, "City.662154e8-f0c6-4690-81e9-9cad8113a089": {"id": "662154e8-f0c6-4690-81e9-9cad8113a089", "created_at": "2024-04-29T09:00:11.009427", "updated_at": "2024-04-29T09:00:11.009720", "__class__": "City"}}
+{
+  "User.7deb4981-0cb3-4aff-be76-39ebe108f66f": {
+    "id": "7deb4981-0cb3-4aff-be76-39ebe108f66f",
+    "created_at": "2024-04-28T19:25:42.517921",
+    "updated_at": "2024-04-28T19:25:42.518359",
+    "__class__": "User"
+  },
+  "City.b1b5c690-2e38-46c3-82bd-db62e3450a36": {
+    "id": "b1b5c690-2e38-46c3-82bd-db62e3450a36",
+    "created_at": "2024-04-29T11:42:34.241260",
+    "updated_at": "2024-04-29T11:42:34.241635",
+    "state_id": "2fa17789-ba61-480e-b344-4250983075a0",
+    "__class__": "City"
+  },
+  "State.2fa17789-ba61-480e-b344-4250983075a0": {
+    "id": "2fa17789-ba61-480e-b344-4250983075a0",
+    "created_at": "2024-04-29T16:00:01.104075",
+    "updated_at": "2024-04-29T16:00:01.104538",
+    "__class__": "State"
+  },
+  "State.70eacfcc-e415-4a7c-a10a-33dbd1468695": {
+    "id": "70eacfcc-e415-4a7c-a10a-33dbd1468695",
+    "created_at": "2024-04-29T16:00:01.868607",
+    "updated_at": "2024-04-29T16:00:01.868985",
+    "__class__": "State"
+  },
+  "State.4c05ec8b-df26-4baa-9c0e-1e1e3af176f7": {
+    "name": "California",
+    "created_at": "2024-04-29T16:02:14.754556",
+    "updated_at": "2024-04-29T16:02:14.754604",
+    "id": "4c05ec8b-df26-4baa-9c0e-1e1e3af176f7",
+    "__class__": "State"
+  },
+  "State.8cac45c3-4adf-4d49-b9ef-7b75cdb609ff": {
+    "name": "California",
+    "created_at": "2024-04-29T16:07:29.833308",
+    "updated_at": "2024-04-29T16:07:29.833371",
+    "id": "8cac45c3-4adf-4d49-b9ef-7b75cdb609ff",
+    "__class__": "State"
+  },
+  "City.58f0a0af-442b-4e8e-a68b-2866d281638b": {
+    "name": "Alexandria",
+    "state_id": "2fa17789-ba61-480e-b344-4250983075a0",
+    "created_at": "2024-04-29T16:26:07.756725",
+    "updated_at": "2024-04-29T16:26:07.768301",
+    "id": "58f0a0af-442b-4e8e-a68b-2866d281638b",
+    "__class__": "City"
+  }
+}
