@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Status of my API"""
+"""Main page"""
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
