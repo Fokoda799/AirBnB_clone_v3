@@ -9,7 +9,7 @@ from models import storage
 @app_views.route('/states/', strict_slashes=False)
 def states():
     """ Get all of states"""
-    states = storage.all('State')
+    states = storage.all(State)
     states_list = []
     for state in states.values():
         states_list.append(state.to_dict())
@@ -32,7 +32,7 @@ def delete_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    storage.delete(state)
+    state.delete()
     storage.save()
     return {}
 
@@ -48,19 +48,24 @@ def create_state():
     new_state = State(**state)
     storage.new(new_state)
     storage.save()
-    storage.reload()
     return make_response(jsonify(new_state.to_dict()), 201)
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
-    """ Update one state """
+    """ A function that updates a State Object """
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    chn = request.get_json()
-    if not chn:
+
+    body_request = request.get_json()
+    if not body_request:
         abort(400, "Not a JSON")
-    state.name = chn['name']
+
+    for k, v in body_request.items():
+        if k != 'id' and k != 'created_at' and k != 'updated_at':
+            setattr(state, k, v)
+
     storage.save()
-    return jsonify(state.to_dict())
+    return make_response(jsonify(state.to_dict()), 200)
